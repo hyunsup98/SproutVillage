@@ -1,21 +1,25 @@
 using UnityEngine;
 
-public class PlayerIdleState : PlayerMovementState
+public class PlayerIdleState : IState
 {
-    public PlayerIdleState(PlayerController player) : base(player)
-    {
+    private PlayerController player;
 
+    public PlayerIdleState(PlayerController player)
+    {
+        this.player = player;
     }
 
-    public override void OnEnter()
+    public void OnEnter()
     {
-        Debug.Log("Idle 상태로 전환 완료");
+        //moveDir의 값이 false면 idle 애니메이션 재생
+        player.SetAnimBool("isMove", player.moveDir != Vector2.zero);
+        player.SetAnimBlend(("idleX", player.idleDir.x), ("idleY", player.idleDir.y));
     }
 
 
-    public override void OnExit() { }
+    public void OnExit() { }
 
-    public override void OnUpdate()
+    public void OnUpdate()
     {
         if(player.moveDir != Vector2.zero)
         {
@@ -33,9 +37,5 @@ public class PlayerIdleState : PlayerMovementState
         }
     }
 
-    public override void OnFixedUpdate()
-    {
-        player.Move();
-    }
-
+    public void OnFixedUpdate() { }
 }

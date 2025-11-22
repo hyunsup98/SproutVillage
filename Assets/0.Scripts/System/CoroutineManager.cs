@@ -3,6 +3,8 @@ using UnityEngine;
 
 public static class CoroutineManager
 {
+    public static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+
     private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
     private static readonly Dictionary<float, WaitForSecondsRealtime> _waitForSecondsRealtime = new Dictionary<float, WaitForSecondsRealtime>();
 

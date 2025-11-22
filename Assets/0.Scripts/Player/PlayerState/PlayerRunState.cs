@@ -9,25 +9,34 @@ public class PlayerRunState : PlayerMovementState
 
     public override void OnEnter()
     {
-        Debug.Log("Run 상태로 전환 완료");
+        base.OnEnter();
     }
 
     public override void OnExit()
     {
-        
+        base.OnExit();
     }
 
     public override void OnUpdate()
     {
+        base.OnUpdate();
+
         if(player.moveDir == Vector2.zero)
         {
             player.SetState(new PlayerIdleState(player));
         }
-        else if (!player.isSprint)
+        else
         {
-            player.SetState(new PlayerMoveState(player));
-        }
+            if(player.isDash)
+            {
+                player.SetState(new PlayerDashState(player));
+            }
 
+            if (!player.isSprint)
+            {
+                player.SetState(new PlayerMoveState(player));
+            }
+        }
     }
 
     public override void OnFixedUpdate()

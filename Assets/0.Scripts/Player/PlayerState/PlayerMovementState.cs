@@ -9,11 +9,21 @@ public abstract class PlayerMovementState : IState
         this.player = player;
     }
 
-    public abstract void OnEnter();
+    public virtual void OnEnter()
+    {
+        //moveDir의 값이 true면 move 애니메이션 재생
+        player.SetAnimBool("isMove", player.moveDir != Vector2.zero);
+    }
 
-    public abstract void OnExit();
+    public virtual void OnExit()
+    {
+        player.Move();
+    }
 
-    public abstract void OnUpdate();
+    public virtual void OnUpdate()
+    {
 
-    public abstract void OnFixedUpdate();
+    }
+
+    public virtual void OnFixedUpdate() { }
 }
