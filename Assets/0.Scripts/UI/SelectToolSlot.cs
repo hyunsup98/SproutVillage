@@ -10,6 +10,8 @@ public class SelectToolSlot : MonoBehaviour
     [SerializeField] private Sprite toolSprite;     //아이템 스프라이트
     [SerializeField] private Tool tool;
 
+    [SerializeField] private PlayerEquipTool playerEquipTool;
+
     private void Awake()
     {
         if (slotImg == null)
@@ -33,5 +35,9 @@ public class SelectToolSlot : MonoBehaviour
         //도구 선택 UI 가리기
         if(selectToolGroup != null)
             selectToolGroup.HideSelectToolGroup();
+
+        //플레이어 현재 도구를 보여주는 UI 갱신
+        if (playerEquipTool != null)
+            playerEquipTool.ShowEquipTool(tool);
     }
 }

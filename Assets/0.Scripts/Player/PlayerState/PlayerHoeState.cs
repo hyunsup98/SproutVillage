@@ -11,6 +11,7 @@ public class PlayerHoeState : PlayerToolState
     public override void OnEnter()
     {
         base.OnEnter();
+        player.SetAnimTrigger("hoe");
     }
 
     public override void OnExit()

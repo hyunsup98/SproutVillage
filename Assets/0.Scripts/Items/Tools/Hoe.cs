@@ -9,6 +9,7 @@ public class Hoe : Tool
 
     public override void Activate()
     {
-
+        Debug.Log("±ªÀÌ ÈÖµÎ¸£±â!");
+        TileManager.Instance.GetTileToSoil();
     }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 정지 상태일 때의 상태
+/// </summary>
 public class PlayerIdleState : IState
 {
     private PlayerController player;
@@ -21,7 +24,13 @@ public class PlayerIdleState : IState
 
     public void OnUpdate()
     {
-        if(player.moveDir != Vector2.zero)
+        //현재 들고있는 도구 사용 상태로 변경
+        if (player.isToolInteracted)
+        {
+            player.SetState(player.CurrentTool.playerToolState);
+        }
+
+        if (player.moveDir != Vector2.zero)
         {
             //플레이어가 이동 중일 때
             if (player.isSprint)

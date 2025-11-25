@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -26,8 +27,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isToolInteracted { get; private set; }      //장비를 착용한 채로 상호작용을 했는지
 
-    private IState currentState;        //현재 플레이어의 상태
-    private Tool currentTool;           //현재 플레이어가 들고 있는 도구
+    public Tool CurrentTool { get; private set; }           //현재 플레이어가 들고 있는 도구
+    private IState currentState;                            //현재 플레이어의 상태
 
     private void Awake()
     {
@@ -60,6 +61,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (CurrentTool != null)
+            GetTargetTilePosition();
+
         currentState?.OnUpdate();
     }
 
@@ -118,9 +122,17 @@ public class PlayerController : MonoBehaviour
     {
         InputSystem.actions["ToolInteract"].started += ctx =>
         {
-            if(currentTool != null)
+            if(GameManager.Instance.CurrentGameState == GameState.Playing && CurrentTool != null)
             {
                 isToolInteracted = true;
+            }
+        };
+
+        InputSystem.actions["ToolInteract"].canceled += ctx =>
+        {
+            if (CurrentTool != null)
+            {
+                isToolInteracted = false;
             }
         };
     }
@@ -137,17 +149,59 @@ public class PlayerController : MonoBehaviour
     //플레이어가 손에 드는 도구 변경
     public void SetPlayerTool(Tool tool)
     {
-        if (currentTool == tool) return;
+        if (CurrentTool == tool) return;
 
-        currentTool = tool;
-        Debug.Log(currentTool);
+        CurrentTool = tool;
     }
 
-    //현재 들고있는 도구의 상호작용
-    public void ToolActivate()
+    public void Activate()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (CurrentTool == null) return;
+
+        CurrentTool.Activate();
+    }
+
+    /// <summary>
+    /// 마우스와 플레이어의 위치를 통해 플레이어 근처 타일 좌표를 계산
+    /// 반경 범위 → 플레이어 주변 한 칸
+    /// ■ ■ ■
+    /// ■ p ■
+    /// ■ ■ ■
+    /// </summary>
+    private void GetTargetTilePosition()
+    {
+        if (GameManager.Instance.CurrentGameState != GameState.Playing) return;
+
+        //보정이 끝난 최종 좌표
+        Vector3Int result = Vector3Int.zero;
+
+        //마우스 좌표 받아오기
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         mousePos.z = 0;
+
+        //좌표 위치 보정, 플레이어 주변 타일 한칸 까지만 적용되게
+        int pPosX = Mathf.FloorToInt(transform.position.x);    //플레이어의 현재 x좌표를 타일 좌표로 처리하기 위해 소수점 버림
+        int pPosY = Mathf.FloorToInt(transform.position.y);    //플레이어의 현재 y좌표를 타일 좌표로 처리하기 위해 소수점 버림
+
+        Vector3 dir = mousePos - new Vector3(pPosX, pPosY, 0);
+
+        if (dir.x < 0)
+            result.x = pPosX - 1;
+        else if (dir.x < 1)
+            result.x = pPosX;
+        else
+            result.x = pPosX + 1;
+
+        if (dir.y < 0)
+            result.y = pPosY - 1;
+        else if (dir.y < 1)
+            result.y = pPosY;
+        else
+            result.y = pPosY + 1;
+
+        //idleDir에 현재 마우스 좌표 주기
+        idleDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
+        TileManager.Instance.GetTile(result);
     }
 
     #region 애니메이션 변경

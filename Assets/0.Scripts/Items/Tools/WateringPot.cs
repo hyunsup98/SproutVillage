@@ -4,7 +4,7 @@ public class WateringPot : Tool
 {
     public override void SetState(PlayerController player)
     {
-        playerToolState = new PlayerHoeState(player);
+        playerToolState = new PlayerWateringPotState(player);
     }
 
     public override void Activate()

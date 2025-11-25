@@ -30,6 +30,9 @@ public class SelectToolGroup : MonoBehaviour
     //도구 선택 슬롯을 키는 트위닝 메서드
     public void ShowSelectToolGroup()
     {
+        //게임 상태 변경
+        GameManager.Instance.CurrentGameState = GameState.InteractionLock;
+
         Sequence sequence = DOTween.Sequence();
 
         for(int i = 0; i < slots.Count; i++)
@@ -54,6 +57,9 @@ public class SelectToolGroup : MonoBehaviour
     //도구 선택 슬롯을 끄는 트위닝 메서드
     public void HideSelectToolGroup()
     {
+        //게임 상태 변경
+        GameManager.Instance.CurrentGameState = GameState.Playing;
+
         Sequence sequence = DOTween.Sequence();
 
         for(int i = 0; i < slots.Count; i++)

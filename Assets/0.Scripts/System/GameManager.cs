@@ -3,9 +3,9 @@ using UnityEngine;
 
 public enum GameState
 {
-    Title,      //타이틀 화면일 때
-    Playing,    //인게임에서 플레이중일 때
-    Pause,      //인게임이지만 일시중지 상태일 때
+    Title,              //타이틀 화면일 때
+    Playing,            //인게임에서 플레이중일 때
+    InteractionLock,    //Playing 상태에서 UI가 켜지는 등의 이유로 몇몇 상호작용이 꺼질 때, 게임 시간이 멈추지는 않음
 }
 
 public class GameManager : Singleton<GameManager>
@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
             {
                 onGameStatePlaying?.Invoke();
             }
-            else if(value == GameState.Pause)
+            else if(value == GameState.InteractionLock)
             {
                 onGameStatePause?.Invoke();
             }
@@ -44,8 +44,10 @@ public class GameManager : Singleton<GameManager>
     public PlayerController Player { get; private set; }
 
     //외부에서 플레이어 받아오기
-    public void SetPlayer(PlayerController player)
+    public void SetPlayer(PlayerController player) => Player = player;
+
+    private void Start()
     {
-        Player = player;
+        CurrentGameState = GameState.Playing;
     }
 }
