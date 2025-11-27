@@ -17,7 +17,7 @@ public class PlayerToolState : IState
     public virtual void OnEnter()
     {
         GameManager.Instance.CurrentGameState = GameState.InteractionLock;
-        player.SetAnimBlend(("idleX", player.idleDir.x), ("idleY", player.idleDir.y));
+        player.SetAnimBlend(("idleX", player.cursorDir.x), ("idleY", player.cursorDir.y));
     }
 
     public virtual void OnExit()
@@ -28,8 +28,10 @@ public class PlayerToolState : IState
 
     public virtual void OnUpdate()
     {
-        if (coolTimer > player.CurrentTool.coolTime)
+        if (player.CurrentTool == null || coolTimer > player.CurrentTool.coolTime)
+        {
             player.SetState(new PlayerIdleState(player));
+        }
 
         coolTimer += Time.deltaTime;
     }

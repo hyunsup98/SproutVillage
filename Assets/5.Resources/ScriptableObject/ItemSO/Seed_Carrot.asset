@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f437723396d85f43bbaae9c68f907f6, type: 3}
+  m_Name: Seed_Carrot
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  <ItemName>k__BackingField: "\uB2F9\uADFC \uC528\uC557"
+  <ItemId>k__BackingField: 13
+  <ItemSprite>k__BackingField: {fileID: -5357301973725202776, guid: e561a47df7502c74e865a803255ffb97, type: 3}
+  <ItemInfo>k__BackingField: "\uC2EC\uC73C\uBA74 \uB2F9\uADFC\uC744 \uC218\uD655\uD560
+    \uC218 \uC788\uB2E4."
+  <IsStackable>k__BackingField: 1
+  <maxCount>k__BackingField: 999
+  <buyPrice>k__BackingField: 150
+  <sellPrice>k__BackingField: 50

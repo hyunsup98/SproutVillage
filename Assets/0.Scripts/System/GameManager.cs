@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -41,13 +43,26 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    public PlayerController Player { get; private set; }
-
-    //외부에서 플레이어 받아오기
-    public void SetPlayer(PlayerController player) => Player = player;
-
-    private void Start()
+    private PlayerController player;
+    public PlayerController Player
     {
-        CurrentGameState = GameState.Playing;
+        get { return player; }
+        set
+        {
+            player = value;
+        }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void Update()
+    {
+        if(Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            player.Gold += 10000;
+        }
     }
 }

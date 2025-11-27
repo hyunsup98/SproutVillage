@@ -21,16 +21,12 @@ public abstract class PlayerMovementState : IState
 
     public virtual void OnExit()
     {
-        player.Move();
+        player.Stop();
     }
 
     public virtual void OnUpdate()
     {
-        //현재 들고있는 도구 사용 상태로 변경
-        if (player.isToolInteracted)
-        {
-            player.SetState(player.CurrentTool.playerToolState);
-        }
+        
     }
 
     public virtual void OnFixedUpdate() { }

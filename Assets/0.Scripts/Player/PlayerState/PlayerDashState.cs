@@ -24,7 +24,9 @@ public class PlayerDashState : PlayerMovementState
         base.OnUpdate();
 
         if(!player.isDash)
+        {
             player.SetState(new PlayerIdleState(player));
+        }
     }
 
     public override void OnFixedUpdate()

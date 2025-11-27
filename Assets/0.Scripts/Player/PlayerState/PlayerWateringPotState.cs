@@ -11,6 +11,7 @@ public class PlayerWateringPotState : PlayerToolState
     {
         base.OnEnter();
         player.SetAnimTrigger("wateringPot");
+        player.SetWaterAnim();
     }
 
     public override void OnExit()

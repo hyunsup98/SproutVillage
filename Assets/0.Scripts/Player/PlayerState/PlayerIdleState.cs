@@ -30,6 +30,12 @@ public class PlayerIdleState : IState
             player.SetState(player.CurrentTool.playerToolState);
         }
 
+        //대쉬
+        if (player.isDash)
+        {
+            player.SetState(new PlayerDashState(player));
+        }
+
         if (player.moveDir != Vector2.zero)
         {
             //플레이어가 이동 중일 때

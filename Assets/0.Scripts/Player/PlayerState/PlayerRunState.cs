@@ -36,6 +36,12 @@ public class PlayerRunState : PlayerMovementState
             {
                 player.SetState(new PlayerMoveState(player));
             }
+
+            //현재 들고있는 도구 사용 상태로 변경
+            if (player.isToolInteracted)
+            {
+                player.SetState(player.CurrentTool.playerToolState);
+            }
         }
     }
 

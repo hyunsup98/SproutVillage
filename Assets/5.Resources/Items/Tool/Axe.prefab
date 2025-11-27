@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Axe
   <toolSprite>k__BackingField: {fileID: -7945996760867833713, guid: e561a47df7502c74e865a803255ffb97, type: 3}
-  <coolTime>k__BackingField: 1
+  <coolTime>k__BackingField: 0.8

@@ -28,16 +28,15 @@ public class SelectToolSlot : MonoBehaviour
         //토글이 isOn인 슬롯만 실행하기 위함
         if (!toggleSlot.isOn) return;
 
-        //플레이어의 도구 바꾸기
-        if (GameManager.Instance.Player != null)
-            GameManager.Instance.Player.SetPlayerTool(tool);
-
         //도구 선택 UI 가리기
-        if(selectToolGroup != null)
+        if (selectToolGroup != null)
             selectToolGroup.HideSelectToolGroup();
 
-        //플레이어 현재 도구를 보여주는 UI 갱신
-        if (playerEquipTool != null)
+        //플레이어의 도구 바꾸기 & 플레이어 현재 도구를 보여주는 UI 갱신
+        if (GameManager.Instance.Player != null && playerEquipTool != null)
+        {
+            GameManager.Instance.Player.CurrentTool = tool;
             playerEquipTool.ShowEquipTool(tool);
+        }
     }
 }
