@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class AnimalAI : MonoBehaviour
 {
-    [Header("컴포넌ㅌ 관련 필드")]
+    [Header("컴포넌트 관련 필드")]
     [SerializeField] private Animator animalAnim;
     [SerializeField] private SpriteRenderer animalRenderer;
 

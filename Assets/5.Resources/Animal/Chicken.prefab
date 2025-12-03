@@ -50,7 +50,7 @@ MonoBehaviour:
   animalAnim: {fileID: 8984665557197177155}
   animalRenderer: {fileID: 7376949289689532597}
   item: {fileID: 6281607532655165550, guid: 37b3364109c98104e86f7d7cb60baa79, type: 3}
-  harvestTime: 30
+  harvestTime: 3
   moveSpeed: 2.5
 --- !u!212 &7376949289689532597
 SpriteRenderer:

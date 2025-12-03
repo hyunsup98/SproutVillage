@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerMovementState
 {
-    public PlayerMoveState(PlayerController player) : base(player)
-    {
-
-    }
+    public PlayerMoveState(PlayerController player) : base(player) { }
 
     public override void OnEnter()
     {
