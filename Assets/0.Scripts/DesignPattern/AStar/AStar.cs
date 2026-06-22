@@ -57,6 +57,9 @@ public class AStar
         Vector2Int startIndex = Vector2Int.FloorToInt(new Vector2(startPos.x, startPos.y));
         Vector2Int endIndex = Vector2Int.FloorToInt(new Vector2(endPos.x, endPos.y));
 
+        if (!IsValidIndex(startIndex, endIndex))
+            return null;
+
         //우선순위큐 생성
         PriorityQueue<AStarNode> queue = new PriorityQueue<AStarNode>();
 
@@ -91,7 +94,7 @@ public class AStar
 
                 if (!visited.Contains(index) && IsValidIndex(currentNode.index, index))
                 {
-                    if(MathF.Abs(index.x) == 1 && MathF.Abs(index.y) == 1)
+                    if(MathF.Abs(neighborsDir[i].x) == 1 && MathF.Abs(neighborsDir[i].y) == 1)
                     {
                         //대각선일 때
                         float g = currentNode.G + 1.4f;

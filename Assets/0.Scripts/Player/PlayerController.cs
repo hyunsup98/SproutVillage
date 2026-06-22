@@ -128,7 +128,8 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         //애니메이션 이벤트가 실행된 후 LateUpdate로 넘어가기 때문에 여기서 다시 초기화
-        hasActiveatedAnim = false;
+        if(hasActiveatedAnim)
+            hasActiveatedAnim = false;
     }
 
     #region Input System
@@ -263,6 +264,7 @@ public class PlayerController : MonoBehaviour
         mousePos.z = 0;
 
         //좌표 위치 보정, 플레이어 주변 타일 한칸 까지만 적용되게
+        Vector3 pPos = Vector3Int.FloorToInt(tilePreviewTransform.position);
         int pPosX = Mathf.FloorToInt(tilePreviewTransform.position.x);    //플레이어의 현재 x좌표를 타일 좌표로 처리하기 위해 소수점 버림
         int pPosY = Mathf.FloorToInt(tilePreviewTransform.position.y);    //플레이어의 현재 y좌표를 타일 좌표로 처리하기 위해 소수점 버림
 

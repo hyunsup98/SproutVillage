@@ -9,6 +9,7 @@ public class WateringPot : Tool
 
     public override void Activate()
     {
+        Debug.Log("π∞ ¡÷±‚!");
         TileManager.Instance.SetTileToWetSoil();
     }
 }

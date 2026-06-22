@@ -15,13 +15,13 @@ public class AnimalAI : MonoBehaviour
     private float harvestTimer = 0f;                        //재료 생산 타이머
 
     [Header("스탯 관련 변수")]
-    [SerializeField] private float moveSpeed = 2.5f;               //이동 속도
+    [SerializeField] private float moveSpeed = 2.5f;        //이동 속도
     private bool isMoved;
 
     private AStar aStar;                                    //에이스타 알고리즘 클래스
     private List<Vector3> path = new List<Vector3>();       //이동 경로
     private Vector3 destination = Vector3.zero;             //지금 당장의 목적지
-    private float pathUpdateTimer = float.MaxValue;                     //경로 갱신을 위한 타이머
+    private float pathUpdateTimer = float.MaxValue;         //경로 갱신을 위한 타이머
     private bool isCalling;                                 //플레이어가 동물을 부른 상태인지에 대한 여부, true → 불렀음 false → 안불렀음
 
     //행동 트리
@@ -82,7 +82,7 @@ public class AnimalAI : MonoBehaviour
     {
         harvestTimer += Time.deltaTime;
 
-        if(harvestTimer >= harvestTime)
+        if (harvestTimer >= harvestTime)
         {
             //생산 시간이 되면 타이머를 초기화 후 Success 반환
             harvestTimer = 0f;
@@ -124,7 +124,7 @@ public class AnimalAI : MonoBehaviour
         pathUpdateTimer += Time.deltaTime;
 
         //경로 갱신 시간이 되면 경로를 다시 갱신해줌
-        if(pathUpdateTimer >= 0.5f)
+        if (pathUpdateTimer >= 0.5f)
         {
             pathUpdateTimer = 0f;
 
@@ -136,6 +136,11 @@ public class AnimalAI : MonoBehaviour
 
                 destination = path[0];
                 path.RemoveAt(0);
+            }
+            else
+            {
+                isMoved = false;
+                animalAnim.SetBool("isMove", false);
             }
         }
         else if (isMoved && path != null)
