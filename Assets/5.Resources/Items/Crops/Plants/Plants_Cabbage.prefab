@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 136203948458210870, guid: 87dcf6faf40e8a94182113a9cf0ec393, type: 3}
   - {fileID: -1975231421049208761, guid: 87dcf6faf40e8a94182113a9cf0ec393, type: 3}
   - {fileID: -7682574386745198715, guid: 87dcf6faf40e8a94182113a9cf0ec393, type: 3}
-  growthDuration: 10
+  growthDuration: 5
   item: {fileID: 3796590112725421612, guid: 63008019c93cd4349ac275e72c4a77e8, type: 3}
 --- !u!212 &3841268716837895110
 SpriteRenderer:

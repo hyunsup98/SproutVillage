@@ -3,7 +3,7 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class DicItem
+public struct DicItem
 {
     public int key;     //슬롯 인덱스
     public int id;      //아이템 아이디

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public abstract class Plant : MonoBehaviour
 {
-    [SerializeField] protected SpriteRenderer plantRenderer;         
+    [SerializeField] protected SpriteRenderer plantRenderer;
     
     [SerializeField] protected Sprite[] sprites;                //각 단계 별 Sprite
     [SerializeField] protected float growthDuration = 60f;      //다음 단계로 자랄 때 까지 걸리는 시간(초)
